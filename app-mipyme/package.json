@@ -1,0 +1,59 @@
+{
+  "name": "app-mipyme",
+  "version": "1.0.0",
+  "description": "Sistema desarrollado para la Hackaton 2019 en BBVA",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "build:dev": "webpack-dev-server --open --config ./webpack.dev.config.js",
+    "build:local": "webpack --env.NODE_ENV=local --env.production --progress",
+    "build:prod": "webpack -p --env.NODE_ENV=production --env.production --progress",
+    "lint": "eslint **/*.js --ignore-path .eslintignore"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joelyustiz/HackathonBBVA2019.git"
+  },
+  "keywords": [
+    "Hackaton",
+    "BBVA",
+    "HackatonBBVA2019",
+    "LegendsCreed"
+  ],
+  "author": "William Velazquez <info@williamvelazquez.com> (https://williamvelazquez.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joelyustiz/HackathonBBVA2019/issues"
+  },
+  "homepage": "https://github.com/joelyustiz/HackathonBBVA2019#readme",
+  "dependencies": {
+    "lodash": "4.17.14",
+    "react": "16.8.4",
+    "react-datepicker": "2.8.0",
+    "react-dom": "16.8.4",
+    "react-select": "3.0.3"
+  },
+  "devDependencies": {
+    "babel-core": "6.26.3",
+    "babel-eslint": "10.0.1",
+    "babel-loader": "7.1.5",
+    "babel-polyfill": "6.26.0",
+    "babel-preset-env": "1.7.0",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-2": "6.24.1",
+    "clean-webpack-plugin": "2.0.0",
+    "css-loader": "2.1.1",
+    "eslint": "5.15.1",
+    "eslint-plugin-react": "7.12.4",
+    "file-loader": "3.0.1",
+    "html-webpack-plugin": "3.2.0",
+    "mini-css-extract-plugin": "0.5.0",
+    "optimize-css-assets-webpack-plugin": "5.0.1",
+    "style-loader": "0.23.1",
+    "uglifyjs-webpack-plugin": "2.1.2",
+    "url-loader": "1.1.2",
+    "webpack": "4.29.6",
+    "webpack-cli": "3.2.3",
+    "webpack-dev-server": "3.2.1"
+  }
+}
