@@ -5,7 +5,10 @@
  */
 package legends.creed.mipyme.controller;
 
+import legends.creed.mipyme.dto.InfoBBVADto;
 import legends.creed.mipyme.dto.RespuestaDto;
+import legends.creed.mipyme.service.InfoBBVAService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,9 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "principal")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class MiPyMeController {
+    @Autowired
+    private InfoBBVAService infoBBVAService;
     
     @GetMapping(path = "/cotizador/{cliente}", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public @ResponseBody RespuestaDto<String> iniciaConferencia(@PathVariable(value="cliente") String cliente) {
+    public @ResponseBody RespuestaDto<String> getCotizacion(@PathVariable(value="cliente") String cliente) {
 		RespuestaDto<String> respuesta = new RespuestaDto<>();
 		
                 String clienteStr = "Cliente: "+cliente;
@@ -36,4 +41,15 @@ public class MiPyMeController {
 		return respuesta;
 	}
     
+        @GetMapping(path = "/cliente/{cliente}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    public @ResponseBody RespuestaDto<InfoBBVADto> getClienteByClave(@PathVariable(value="cliente") String cliente) {
+		RespuestaDto<InfoBBVADto> respuesta = new RespuestaDto<>();
+		
+                String clienteStr = "Cliente: "+cliente;
+                respuesta.setCodigo(0);
+                respuesta.setMensaje("OK");
+                respuesta.setResultado(infoBBVAService.getClienteByClave(respuesta, cliente));
+                
+		return respuesta;
+	}
 }
