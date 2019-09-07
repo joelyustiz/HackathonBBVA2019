@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "build:dev": "webpack-dev-server --open --config ./webpack.dev.config.js",
-    "build:local": "webpack --env.NODE_ENV=local --env.production --progress",
-    "build:prod": "webpack -p --env.NODE_ENV=production --env.production --progress",
+    "dev": "webpack-dev-server --open --config ./webpack.dev.config.js",
+    "local": "webpack --env.NODE_ENV=local --env.production --progress",
+    "prod": "webpack -p --env.NODE_ENV=production --env.production --progress",
     "lint": "eslint **/*.js --ignore-path .eslintignore"
   },
   "repository": {
