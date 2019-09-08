@@ -138,7 +138,7 @@ class App extends Component {
         <div className="container-parrafo">
           <div className="skewed">
             <h1 className="title">
-            Bienvenido a tu ayudante PyMeCre
+            Bienvenido a tu ayudante CrediPyME
             </h1>
             <p className="parrafo">Tu herramienta para validar si una empresa es apta para un crédito</p>
           </div>

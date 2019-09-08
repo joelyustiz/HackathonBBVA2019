@@ -57,7 +57,7 @@ function CustomTable(props) {
                       <tr scope="row">
                         {
                           !!withIndex &&
-                          <td>{index}</td>
+                          <td style={getTextPosition({textPosition: "center"})}>{index}</td>
                         }
                         {Array.isArray(columns) &&
                           columns.map(columnsValue => {
