@@ -13,7 +13,8 @@ import ContentLayout from '../components/ContentLayout';
 import LabelInput from '../components/LabelInput';
 import Button from '../components/Button';
 import FinalGrade from './components/FinalGrade';
-// import CustomTable from  '../components/CustomeTable';
+import CustomTable from  '../components/CustomTable';
+
 
 class App extends Component {
 
@@ -23,8 +24,16 @@ class App extends Component {
       loading: false,
       clientId: 0,
       clientData: {},
-      score: 0
+      score: 0,
+      historyData:[],
+      isVisibleHistory: false,
+      List:{}
     };
+  }
+
+  componentDidMount() {
+    this.handleSearchClient('B528688042588');
+    this.getResultClient('000017531');
   }
 
   handleLoading = (value, callback) => {
@@ -46,8 +55,8 @@ class App extends Component {
     Api.apiPublicGet(serviceURL, (json)=>
       {
         if (json.codigo != "0") {
-          console.log('error');
-        }else{
+          console.log('error searchClient');
+        }else{      
           this.setState({clientData: json.resultado})
         }
       }
@@ -60,17 +69,39 @@ class App extends Component {
 
     Api.apiPublicGet(serviceURL, (json)=>
       {
+        this.setState({
+          isVisibleHistory: false
+        })
         if (json.codigo != "0") {
-          console.log('error');
+          console.log('error getScore');
         }else{
+          
           this.setState({score: json.resultado})
+        }
+      }
+    )
+  }
+  
+  getResultClient = id => {
+    const serviceURL = `/principal/resultados/${id}`
+
+    Api.apiPublicGet(serviceURL, (json)=>
+      {
+        this.setState({
+          score: 0
+        })
+        if (json.codigo != "0") {
+          console.log('error history');
+        }else{
+          console.log('prueba', json.resultado);
+          this.setState({historyData: json.resultado, isVisibleHistory: true})
         }
       }
     )
   }
 
   render() {
-    const {clientId, score}=this.state;
+    const {clientId, score, isVisibleHistory}=this.state;
     return (
       <ContentLayout>
         <form className="search-container" onSubmit={(event)=>{event.preventDefault();this.handleGetScore(clientId)}}>
@@ -85,13 +116,16 @@ class App extends Component {
             text="Calcular"
             handleButtonClick={()=>this.handleGetScore(clientId)}
           />
+          <Button 
+            text="Ver histórico"
+            handleButtonClick={()=>this.getResultClient(clientId)}
+          />
         </form>
 
         {
-          score && 
+          score ?
           <FinalGrade grade={score.toFixed(2)} animated={true} />
-        }
-        {/* {
+          : isVisibleHistory ?
           <CustomTable 
             title="-----"
             isVisible
@@ -102,8 +136,9 @@ class App extends Component {
             noDataTable="Sin Datos"
             isVisibleTotalText
             totalText="..."
-        />
-        } */}
+          /> :
+            <div/>
+        }
 
         {this.state.loading && <CubeLoader />}
       </ContentLayout>
