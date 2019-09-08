@@ -1,0 +1,6 @@
+/*@Author William E. Velázquez A. - info@williamvelazquez.com*/
+.layout-content{
+    min-height: 100vh;
+    font-family: "Muli", sans-serif;
+    background-image: linear-gradient(#072146, #30638E);
+}

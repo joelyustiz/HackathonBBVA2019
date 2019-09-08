@@ -1,0 +1,59 @@
+/*@Author William E. Velázquez A. - info@williamvelazquez.com*/
+.finalGradeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grade {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  /* background-color: white; */
+  -webkit-box-shadow: 10px 10px 15px -2px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 10px 10px 15px -2px rgba(0, 0, 0, 0.7);
+  box-shadow: 10px 10px 15px -2px rgba(0, 0, 0, 0.7);
+}
+
+.red {
+  /* border: 2px solid #d1495b; */
+  background-color: #d1495b;
+}
+
+.yellow {
+  /* border: 2px solid #edae49; */
+  background-color: #edae49;
+}
+
+.green {
+  /* border: 2px solid #00798c; */
+  background-color: #00798c;
+}
+
+.animated {
+  animation-duration: 2.5s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.pulse {
+  animation-name: pulse;
+  animation-duration: 2s;
+}
