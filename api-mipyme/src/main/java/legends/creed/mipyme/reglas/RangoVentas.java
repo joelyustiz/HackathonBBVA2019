@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package legends.creed.mipyme.enums;
+package legends.creed.mipyme.reglas;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class RangoVentas {
 
     private static Map<String, Double> createMap() {
         Map<String, Double> result = new HashMap<>();
-        result.put("A. Menor a 01M", 0.6);
+        result.put("A   . Menor a 01M", 0.6);
         result.put("B. 01M-02M", 1.2);
         result.put("C. 02M-03M", 1.8);
         result.put("D. 03M-04M", 2.4);
