@@ -66,7 +66,7 @@ public class InfoBBVADao {
                                 cliente.setSaldo_cuenta_cheques_jul19(rs.getInt("saldo_cuenta_cheques_jul19"));
                                 cliente.setMas_100_mil(rs.getInt("mas_100_mil"));
                                 cliente.setMas_300_mil(rs.getInt("mas_300_mil"));
-                                cliente.setMas_600_mil(rs.getInt("mas_600_mill"));
+                                cliente.setMas_600_mil(rs.getInt("mas_600_mil"));
                                 cliente.setMas_1_millon(rs.getInt("mas_1_millon"));
                                 
 				return cliente;
