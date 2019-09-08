@@ -13,6 +13,7 @@ import ContentLayout from '../components/ContentLayout';
 import LabelInput from '../components/LabelInput';
 import Button from '../components/Button';
 import FinalGrade from './components/FinalGrade';
+import AlertText from '../components/AlertText';
 // import CustomTable from  '../components/CustomeTable';
 
 class App extends Component {
@@ -23,13 +24,18 @@ class App extends Component {
       loading: false,
       clientId: 0,
       clientData: {},
-      score: 0
+      score: 0,
+      errorMsg: ''
     };
   }
 
   handleLoading = (value, callback) => {
     this.setState({ loading: value }, ()=>{callback && callback()});
   };
+
+  handleError = (error) => {
+    this.setState({errorMsg:error}, ()=>setTimeout(()=>this.setState({errorMsg:''}),5000))
+  }
 
   handleChange = event => {
     // console.log(`value-->${event.target.value} | id-->${event.target.id}`);
@@ -46,39 +52,52 @@ class App extends Component {
       ()=>Api.apiPublicGet(serviceURL, (json)=>
         {
           if (json.codigo != "0") {
-            console.log('error');
+            // console.log('error');
+            this.handleError(json.mensaje);
           }else{
             this.setState({clientData: json.resultado})
           }
           this.handleLoading(false);
         }
-        ,()=>this.handleLoading(false)
+        ,()=>{this.handleError('Error al comunicarse con el servidor'); this.handleLoading(false)}
       )
     );
   }
 
   handleGetScore = (id) => {
     // console.log('id--->', id);
-    const serviceURL=`/principal/cotizador/${id}`;
-    this.handleLoading(true,
-      ()=>Api.apiPublicGet(serviceURL, (json)=>
-        {
-          if (json.codigo != "0") {
-            console.log('error');
-          }else{
-            this.setState({score: json.resultado})
+    if(id){
+      const serviceURL=`/principal/cotizador/${id}`;
+      this.handleLoading(true,
+        ()=>Api.apiPublicGet(serviceURL, (json)=>
+          {
+            if (json.codigo != "0") {
+              // console.log('error');
+              this.handleError(json.mensaje);
+            }else{
+              this.setState({score: json.resultado})
+            }
+            this.handleLoading(false);
           }
-          this.handleLoading(false);
-        }
-        ,()=>this.handleLoading(false)
-      )
-    );
+          ,()=>{this.handleError('Error al comunicarse con el servidor'); this.handleLoading(false)}
+        )
+      );
+    }else{
+      this.handleError('Favor de ingresar una clave de cliente válida.');
+    }
   }
 
   render() {
-    const {clientId, score}=this.state;
+    const {clientId, score, errorMsg}=this.state;
     return (
       <ContentLayout>
+        {
+          errorMsg &&
+          <AlertText 
+            success={false}
+            title={errorMsg}
+          />
+        }
         <form className="search-container" onSubmit={(event)=>{event.preventDefault();this.handleGetScore(clientId)}}>
           <LabelInput 
             id="clientId"
