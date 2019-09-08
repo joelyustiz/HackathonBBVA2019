@@ -8,13 +8,14 @@ import './app.css';
 
 import Api from "../utils/api";
 
+import AlertText from '../components/AlertText';
 import CubeLoader from "../components/CubeLoader";
 import ContentLayout from '../components/ContentLayout';
 import LabelInput from '../components/LabelInput';
 import Button from '../components/Button';
 import FinalGrade from './components/FinalGrade';
-import AlertText from '../components/AlertText';
-// import CustomTable from  '../components/CustomeTable';
+import CustomTable from  '../components/CustomTable';
+
 
 class App extends Component {
 
@@ -26,6 +27,9 @@ class App extends Component {
       clientData: {},
       score: 0,
       errorMsg: ''
+      historyData:[],
+      isVisibleHistory: false,
+      List:{}
     };
   }
 
@@ -110,13 +114,16 @@ class App extends Component {
             text="Calcular"
             handleButtonClick={()=>this.handleGetScore(clientId)}
           />
+          <Button 
+            text="Ver histórico"
+            handleButtonClick={()=>this.getResultClient(clientId)}
+          />
         </form>
 
         {
-          score && 
+          score ?
           <FinalGrade grade={score.toFixed(2)} animated={true} />
-        }
-        {/* {
+          : isVisibleHistory ?
           <CustomTable 
             title="-----"
             isVisible
@@ -127,8 +134,9 @@ class App extends Component {
             noDataTable="Sin Datos"
             isVisibleTotalText
             totalText="..."
-        />
-        } */}
+          /> :
+            <div/>
+        }
 
         {this.state.loading && <CubeLoader />}
       </ContentLayout>

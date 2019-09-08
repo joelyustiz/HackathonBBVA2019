@@ -1,7 +1,7 @@
 //@Author William E. Velázquez A. - info@williamvelazquez.com
 import React from "react";
 
-import '../custom-table.css';
+//import '../custom-table.css';
 
 function CustomTable(props) {
   const {
@@ -34,7 +34,7 @@ function CustomTable(props) {
         <div className="">
           <div className="container-table">
             <h3>{title}</h3>
-						<hr class="red" />
+						<hr className="red" />
             <table
               className={`table table-striped table-responsive${
                 data.length > 0 ? "" : " noBottom"
