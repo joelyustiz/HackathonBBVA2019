@@ -5,6 +5,7 @@ import CubeLoader from "../components/CubeLoader";
 
 import '../libs/animate.css';
 // import * as Constants from 'Constants/app';
+import Form from '../form/form'
 
 class App extends Component {
 
@@ -22,7 +23,11 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.loading && <CubeLoader />}
+        {//this.state.loading && <CubeLoader />
+        }
+        <Form isVisible>
+
+        </Form>
       </React.Fragment>
     );
   }
