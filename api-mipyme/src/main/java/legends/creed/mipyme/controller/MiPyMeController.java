@@ -39,13 +39,29 @@ public class MiPyMeController {
     private ResultadosPonderacionesService resultadosPonderacionesService;
     
     @GetMapping(path = "/cotizador/{cliente}", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public @ResponseBody RespuestaDto<String> getCotizacion(@PathVariable(value="cliente") String cliente) {
-        RespuestaDto<String> respuesta = new RespuestaDto<>();
+    public @ResponseBody RespuestaDto<Double> getCotizacion(@PathVariable(value="cliente") String cliente) {
+        RespuestaDto<Double> respuesta = new RespuestaDto<>();
 
-                String clienteStr = "Cliente: "+cliente;
+                if (cliente == null || cliente.equals("")) {
+            respuesta.setCodigo(1);
+            respuesta.setMensaje("No se encontraron resultados");
+        }
+            try {
                 respuesta.setCodigo(0);
                 respuesta.setMensaje("OK");
-                respuesta.setResultado(clienteStr);
+                InfoBBVADto info = infoBBVAService.getClienteByClave(new RespuestaDto<>(), cliente);
+                
+                Ponderacion pondera = new Ponderacion(info);
+                
+                respuesta.setResultado(pondera.calcularPonderacion());
+                
+            } catch (SQLException e) {
+                respuesta.setCodigo(1);
+                respuesta.setMensaje("No se encontró información");
+            }catch (EmptyResultDataAccessException ee){
+                respuesta.setCodigo(1);
+                respuesta.setMensaje("No se encontró información");
+            }
                 
 		return respuesta;
 	}
