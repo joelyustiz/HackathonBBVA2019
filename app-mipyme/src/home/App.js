@@ -31,11 +31,6 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    this.handleSearchClient('B528688042588');
-    this.getResultClient('000017531');
-  }
-
   handleLoading = (value, callback) => {
     this.setState({ loading: value }, ()=>{callback && callback()});
   };
@@ -51,40 +46,42 @@ class App extends Component {
     console.log('id--->', id);
     //'B528688042588'
     const serviceURL=`/principal/cliente/${id}`;
-
-    Api.apiPublicGet(serviceURL, (json)=>
-      {
-        if (json.codigo != "0") {
-          console.log('error searchClient');
-        }else{      
-          this.setState({clientData: json.resultado})
+    this.handleLoading(true,
+      ()=>Api.apiPublicGet(serviceURL, (json)=>
+        {
+          if (json.codigo != "0") {
+            console.log('error');
+          }else{
+            this.setState({clientData: json.resultado})
+          }
+          this.handleLoading(false);
         }
-      }
-    )
+        ,()=>this.handleLoading(false)
+      )
+    );
   }
 
   handleGetScore = (id) => {
-    console.log('id--->', id);
+    // console.log('id--->', id);
     const serviceURL=`/principal/cotizador/${id}`;
-
-    Api.apiPublicGet(serviceURL, (json)=>
-      {
-        this.setState({
-          isVisibleHistory: false
-        })
-        if (json.codigo != "0") {
-          console.log('error getScore');
-        }else{
-          
-          this.setState({score: json.resultado})
+    this.handleLoading(true,
+      ()=>Api.apiPublicGet(serviceURL, (json)=>
+        {
+          if (json.codigo != "0") {
+            console.log('error');
+          }else{
+            this.setState({score: json.resultado})
+          }
+          this.handleLoading(false);
         }
-      }
-    )
+        ,()=>this.handleLoading(false)
+      )
+    );
+    this.setState({isVisibleHistory: false})
   }
   
   getResultClient = id => {
     const serviceURL = `/principal/resultados/${id}`
-
     Api.apiPublicGet(serviceURL, (json)=>
       {
         this.setState({
@@ -98,6 +95,7 @@ class App extends Component {
         }
       }
     )
+    this.setState({score: 0})
   }
 
   render() {
