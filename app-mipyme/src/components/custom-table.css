@@ -1,0 +1,85 @@
+/*@Author William E. Velázquez A. - info@williamvelazquez.com*/
+.container-table{
+    overflow-x: auto;
+    max-height: 300px;
+  }
+  
+  @media screen and (max-width: 767px){
+    .table-responsive {
+      border: none !important;
+    }
+  }
+  
+  hr.red{
+    margin-top: -5px;
+    margin-bottom: 15px;
+  }
+  
+  .left-data{
+    text-align: left !important;
+  }
+  
+  .table>thead>tr>th,
+  .table>tbody>tr>th,
+  .table>tbody>tr>td
+  {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 13px;
+  }
+  
+  .ph-data{
+    font-weight: 600;
+    color: navy;
+  }
+  
+  .assigned{
+    color: #ee3840;
+  }
+  
+  .available{
+    color: #39b923;
+  }
+  
+  hr.red{
+    margin-bottom: 15px;
+    margin-top: -5px;
+  }
+  
+  .content-block{
+    border: 1px solid #545454;
+    /*margin: 20px 0px;*/
+    margin: 0px 0px 20px 0px;
+    padding: 0px 25px;
+    border-radius: 5px;
+    /*padding-bottom: 25px;
+    box-shadow: 5px 5px 6px -1px #D0021B;*/
+  }
+  
+  .plazas-block{
+    height: 100%;
+  }
+  
+  .content-table{
+    width: 100%;
+    max-height: 320px;
+    overflow: auto;
+    margin-bottom: 15px;
+  }
+  
+  .noBottom{
+    margin-bottom: 0px;
+  }
+  
+  .paging{
+    float: right;
+    color: #aeaeae;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 15px;
+  }
+  
+  .info-btn{
+    font-size: 16px;
+    cursor: pointer;
+  }

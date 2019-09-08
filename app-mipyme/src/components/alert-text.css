@@ -1,0 +1,33 @@
+/*@Author William E. Velázquez A. - info@williamvelazquez.com*/
+.alertContainer {
+  color: #052a4f;
+  text-align: left;
+  border-radius: 10px;
+  background: #eaeaea;
+  margin: 0px 40px 20px 40px;
+}
+.alertBox {
+  padding: 10px;
+  font-size: 18px;
+}
+.alertError {
+  border: 3px solid #7b0b0b;
+  background: #fff5f5;
+}
+.alertSuccess {
+  border: 3px solid #00940a;
+  background: #f3fff0;
+}
+.text {
+  margin: 0px;
+  text-align: left;
+}
+@media (max-width: 767px) {
+  .alertBox {
+    padding: 5px;
+    font-size: 14px;
+  }
+  .alertContainer {
+    text-align: center;
+  }
+}
