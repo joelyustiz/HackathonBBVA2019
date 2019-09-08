@@ -6,6 +6,8 @@ import '../libs/bootstrap.min.css';
 
 import './app.css';
 
+import Api from "../utils/api";
+
 import CubeLoader from "../components/CubeLoader";
 import ContentLayout from '../components/ContentLayout';
 import LabelInput from '../components/LabelInput';
@@ -18,7 +20,8 @@ class App extends Component {
     super(props);
     this.state =  {
       loading: false,
-      clientId: 0
+      clientId: 0,
+      clientData: {}
     };
   }
 
@@ -35,13 +38,25 @@ class App extends Component {
 
   handleSearchClient = (id) => {
     console.log('id--->', id);
+    //'B528688042588'
+    const serviceURL=`/principal/cliente/${id}`;
+
+    Api.apiPublicGet(serviceURL, (json)=>
+      {
+        if (json.codigo != "0") {
+          console.log('error');
+        }else{
+          this.setState({clientData: json.resultado})
+        }
+      }
+    )
   }
 
   render() {
     const {clientId}=this.state;
     return (
       <ContentLayout>
-        <section className="search-container">
+        <form className="search-container" onSubmit={(event)=>{event.preventDefault();this.handleSearchClient(clientId)}}>
           <LabelInput 
             id="clientId"
             label="Ingresa la clave del cliente:"
@@ -53,7 +68,7 @@ class App extends Component {
             text="Buscar"
             handleButtonClick={()=>this.handleSearchClient(clientId)}
           />
-        </section>
+        </form>
         {this.state.loading && <CubeLoader />}
       </ContentLayout>
     );
