@@ -46,7 +46,7 @@ function CustomTable(props) {
                   }
                   {Array.isArray(headers) &&
                     headers.map(item => {
-                      return <th scope="col">{item.text}</th>;
+                      return <th style={getTextPosition({textPosition: "center"})} scope="col">{item.text}</th>;
                     })}
                 </tr>
               </thead>
