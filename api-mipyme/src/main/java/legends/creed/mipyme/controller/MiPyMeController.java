@@ -86,7 +86,7 @@ public class MiPyMeController {
             resultados = resultadosPonderacionesService.getResultadosPonderaciones(respuesta, cliente);
             if(resultados.isEmpty()){
                 respuesta.setCodigo(1);
-                respuesta.setMensaje("No se encontro la información");
+                respuesta.setMensaje("No se encontró la información");
             }else{
             respuesta.setCodigo(0);
             respuesta.setMensaje("OK");
