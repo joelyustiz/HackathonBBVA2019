@@ -177,7 +177,7 @@ class App extends Component {
           <FinalGrade grade={score.toFixed(2)} animated={true} />
           : isVisibleHistory ?
           <CustomTable 
-            title="-----"
+            title=""
             isVisible
             withIndex
             data={this.state.historyData}
