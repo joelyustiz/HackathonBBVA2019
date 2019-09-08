@@ -34,11 +34,9 @@ function CustomTable(props) {
         <div className="">
           <div className="container-table">
             <h3>{title}</h3>
-						<hr className="red" />
+						<hr className="" />
             <table
-              className={`table table-striped table-responsive${
-                data.length > 0 ? "" : " noBottom"
-              }`}
+              className='table table-striped'
             >
               <thead>
                 <tr>
@@ -48,7 +46,7 @@ function CustomTable(props) {
                   }
                   {Array.isArray(headers) &&
                     headers.map(item => {
-                      return <th style={getTextPosition(item)}>{item.text}</th>;
+                      return <th scope="col">{item.text}</th>;
                     })}
                 </tr>
               </thead>
@@ -56,7 +54,7 @@ function CustomTable(props) {
                 {data.length > 0 ? (
                   data.map((item,index) => {
                     return (
-                      <tr>
+                      <tr scope="row">
                         {
                           !!withIndex &&
                           <td>{index}</td>

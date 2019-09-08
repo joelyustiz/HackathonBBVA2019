@@ -7,3 +7,24 @@
   grid-template-columns: 300px;
   margin-bottom: 30px;
 }
+
+.table {
+  background: white;
+  width: 80%;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.container-table {
+  
+}
+
+.boton-historico {
+  margin-top: 5px;
+  background: #2DCCCD;
+}
+
+.boton-historico:hover {
+  background: #02A5A5;
+
+}

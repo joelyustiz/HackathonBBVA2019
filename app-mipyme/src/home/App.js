@@ -15,7 +15,16 @@ import LabelInput from '../components/LabelInput';
 import Button from '../components/Button';
 import FinalGrade from './components/FinalGrade';
 import CustomTable from  '../components/CustomTable';
-
+ const  tableHeaders=[
+  { text: "Cliente" },
+  { text: "Fecha de cotización" },
+  { text: "Ponderación" }
+];
+const tableDataColumns=[
+  { key: "cliente", type: "1", textPosition: "center" },
+  { key: "fecha_creacion", type: "1", textPosition: "center" },
+  { key: "ponderacion_total", type: "1", textPosition: "center" },
+];
 
 class App extends Component {
 
@@ -26,10 +35,12 @@ class App extends Component {
       clientId: 0,
       clientData: {},
       score: 0,
-      errorMsg: ''
+      errorMsg: '',
       historyData:[],
       isVisibleHistory: false,
-      List:{}
+      List:{},
+      ListHeaders:{},
+      ListDataColumns:{}
     };
   }
 
@@ -66,6 +77,10 @@ class App extends Component {
         ,()=>{this.handleError('Error al comunicarse con el servidor'); this.handleLoading(false)}
       )
     );
+
+    this.setState({
+      isVisibleHistory: false
+    })
   }
 
   handleGetScore = (id) => {
@@ -89,10 +104,32 @@ class App extends Component {
     }else{
       this.handleError('Favor de ingresar una clave de cliente válida.');
     }
+
+    this.setState({isVisibleHistory: false})
   }
+  
+  getResultClient = id => {
+    console.log('llega id',id );
+    
+    const serviceURL = `/principal/resultados/${id}`
+    Api.apiPublicGet(serviceURL, (json)=>
+      {
+        this.setState({
+          score: 0
+        })
+        if (json.codigo != "0") {
+          console.log('error history');
+        }else{
+          console.log('prueba', json.resultado);
+          this.setState({historyData: json.resultado, isVisibleHistory: true})
+        }
+      }
+    )
+    this.setState({score: 0})
+  } 
 
   render() {
-    const {clientId, score, errorMsg}=this.state;
+    const {clientId, score, errorMsg, isVisibleHistory, historyData} = this.state;
     return (
       <ContentLayout>
         {
@@ -116,6 +153,7 @@ class App extends Component {
           />
           <Button 
             text="Ver histórico"
+            className="boton-historico"
             handleButtonClick={()=>this.getResultClient(clientId)}
           />
         </form>
@@ -128,9 +166,9 @@ class App extends Component {
             title="-----"
             isVisible
             withIndex
-            data={this.state.List}
-            headers={this.state.ListHeaders}
-            columns={this.state.ListDataColumns}
+            data={this.state.historyData}
+            headers={tableHeaders}
+            columns={tableDataColumns}
             noDataTable="Sin Datos"
             isVisibleTotalText
             totalText="..."
