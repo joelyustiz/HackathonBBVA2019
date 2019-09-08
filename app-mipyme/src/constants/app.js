@@ -1,0 +1,1 @@
+export const PUBLIC_URL = 'https://da0f03e2.ngrok.io/api-mipyme';
