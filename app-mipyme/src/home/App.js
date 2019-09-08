@@ -12,7 +12,8 @@ import CubeLoader from "../components/CubeLoader";
 import ContentLayout from '../components/ContentLayout';
 import LabelInput from '../components/LabelInput';
 import Button from '../components/Button';
-// import * as Constants from 'Constants/app';
+import FinalGrade from './components/FinalGrade';
+// import CustomTable from  '../components/CustomeTable';
 
 class App extends Component {
 
@@ -21,7 +22,8 @@ class App extends Component {
     this.state =  {
       loading: false,
       clientId: 0,
-      clientData: {}
+      clientData: {},
+      score: 0
     };
   }
 
@@ -52,11 +54,26 @@ class App extends Component {
     )
   }
 
+  handleGetScore = (id) => {
+    console.log('id--->', id);
+    const serviceURL=`/principal/cotizador/${id}`;
+
+    Api.apiPublicGet(serviceURL, (json)=>
+      {
+        if (json.codigo != "0") {
+          console.log('error');
+        }else{
+          this.setState({score: json.resultado})
+        }
+      }
+    )
+  }
+
   render() {
-    const {clientId}=this.state;
+    const {clientId, score}=this.state;
     return (
       <ContentLayout>
-        <form className="search-container" onSubmit={(event)=>{event.preventDefault();this.handleSearchClient(clientId)}}>
+        <form className="search-container" onSubmit={(event)=>{event.preventDefault();this.handleGetScore(clientId)}}>
           <LabelInput 
             id="clientId"
             label="Ingresa la clave del cliente:"
@@ -65,10 +82,29 @@ class App extends Component {
             handleChange={this.handleChange}
           />
           <Button 
-            text="Buscar"
-            handleButtonClick={()=>this.handleSearchClient(clientId)}
+            text="Calcular"
+            handleButtonClick={()=>this.handleGetScore(clientId)}
           />
         </form>
+
+        {
+          score && 
+          <FinalGrade grade={score.toFixed(2)} animated={true} />
+        }
+        {/* {
+          <CustomTable 
+            title="-----"
+            isVisible
+            withIndex
+            data={this.state.List}
+            headers={this.state.ListHeaders}
+            columns={this.state.ListDataColumns}
+            noDataTable="Sin Datos"
+            isVisibleTotalText
+            totalText="..."
+        />
+        } */}
+
         {this.state.loading && <CubeLoader />}
       </ContentLayout>
     );
