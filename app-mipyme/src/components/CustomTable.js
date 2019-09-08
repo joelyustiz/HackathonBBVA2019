@@ -54,10 +54,10 @@ function CustomTable(props) {
                 {data.length > 0 ? (
                   data.map((item,index) => {
                     return (
-                      <tr scope="row">
+                      <tr jey={index} scope="row">
                         {
                           !!withIndex &&
-                          <td style={getTextPosition({textPosition: "center"})}>{index}</td>
+                          <td>{index}</td>
                         }
                         {Array.isArray(columns) &&
                           columns.map(columnsValue => {
