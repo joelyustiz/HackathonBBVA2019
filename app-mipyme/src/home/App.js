@@ -109,22 +109,25 @@ class App extends Component {
   }
   
   getResultClient = id => {
-    console.log('llega id',id );
-    
     const serviceURL = `/principal/resultados/${id}`
-    Api.apiPublicGet(serviceURL, (json)=>
+    if (id) {
+      Api.apiPublicGet(serviceURL, (json)=>
       {
         this.setState({
           score: 0
         })
         if (json.codigo != "0") {
-          console.log('error history');
+          //console.log('error history');
+          this.handleError(json.mensaje);
         }else{
           console.log('prueba', json.resultado);
           this.setState({historyData: json.resultado, isVisibleHistory: true})
         }
       }
     )
+    } else {
+      this.handleError('Favor de ingresar una clave de cliente válida.');
+    }
     this.setState({score: 0})
   } 
 
