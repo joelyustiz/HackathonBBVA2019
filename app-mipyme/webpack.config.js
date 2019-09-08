@@ -18,7 +18,7 @@ module.exports = (env) => {
       filename: '../index.html',
       template: 'public/index.html',
       favicon: './public/favicon.ico',
-      title: 'Hackaton BBVA 2019 | Legends Creed'
+      title: 'Hackaton BBVA 2019 | MiPyME - Legends Creed'
     })
   ]
 
@@ -49,7 +49,7 @@ module.exports = (env) => {
       app: path.resolve(__dirname, 'src/entries/app.js'),
     },
     output: {
-      path: (env.NODE_ENV === 'production') ? path.resolve(__dirname, '../app-mipyme/src/main/webapp/publico/') : path.resolve(__dirname, 'dist'),
+      path: (env.NODE_ENV === 'production') ? path.resolve(__dirname, '../api-mipyme/src/main/webapp/publico/') : path.resolve(__dirname, 'dist'),
       filename: 'js/[name].[hash].js',
       publicPath: (env.NODE_ENV === 'production') ? './publico/' : './dist/',
       chunkFilename: 'js/[id].[chunkhash].js',

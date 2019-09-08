@@ -1,3 +1,4 @@
+//@Author William E. Velázquez A. - info@williamvelazquez.com
 import React from 'react';
 
 import './content-layout.css';
