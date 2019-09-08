@@ -135,6 +135,16 @@ class App extends Component {
     const {clientId, score, errorMsg, isVisibleHistory, historyData} = this.state;
     return (
       <ContentLayout>
+        <div className="container-parrafo">
+          <div className="skewed">
+            <h1 className="title">
+            Bienvenido a tu ayudante PyMeCre
+            </h1>
+            <p className="parrafo">Tu herramienta para validar si una empresa es apta para un crédito</p>
+          </div>
+          <div className="triangle"></div>
+        </div>
+        
         {
           errorMsg &&
           <AlertText 
@@ -142,6 +152,7 @@ class App extends Component {
             title={errorMsg}
           />
         }
+        
         <form className="search-container" onSubmit={(event)=>{event.preventDefault();this.handleGetScore(clientId)}}>
           <LabelInput 
             id="clientId"
