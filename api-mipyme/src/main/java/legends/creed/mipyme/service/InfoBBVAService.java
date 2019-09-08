@@ -17,11 +17,11 @@ import org.springframework.stereotype.Service;
  */
 @Service("infoBBVAService")
 public class InfoBBVAService {
-    
+
     @Autowired
     private InfoBBVADao infoBBVADao;
-    
+
     public InfoBBVADto getClienteByClave(RespuestaDto<InfoBBVADto> respuesta,String claveCliente){
-    return infoBBVADao.getClienteByClave(respuesta, claveCliente);
-}
+        return infoBBVADao.getClienteByClave(respuesta, claveCliente);
+    }
 }

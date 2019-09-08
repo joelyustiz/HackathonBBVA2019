@@ -28,28 +28,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MiPyMeController {
     @Autowired
     private InfoBBVAService infoBBVAService;
-    
+
     @GetMapping(path = "/cotizador/{cliente}", produces = { MediaType.APPLICATION_JSON_VALUE })
     public @ResponseBody RespuestaDto<String> getCotizacion(@PathVariable(value="cliente") String cliente) {
-		RespuestaDto<String> respuesta = new RespuestaDto<>();
-		
+        RespuestaDto<String> respuesta = new RespuestaDto<>();
+
                 String clienteStr = "Cliente: "+cliente;
-                respuesta.setCodigo(0);
-                respuesta.setMensaje("OK");
-                respuesta.setResultado(clienteStr);
-                
-		return respuesta;
-	}
-    
+        respuesta.setCodigo(0);
+        respuesta.setMensaje("OK");
+        respuesta.setResultado(clienteStr);
+
+        return respuesta;
+    }
+
         @GetMapping(path = "/cliente/{cliente}", produces = { MediaType.APPLICATION_JSON_VALUE })
     public @ResponseBody RespuestaDto<InfoBBVADto> getClienteByClave(@PathVariable(value="cliente") String cliente) {
-		RespuestaDto<InfoBBVADto> respuesta = new RespuestaDto<>();
-		
+        RespuestaDto<InfoBBVADto> respuesta = new RespuestaDto<>();
+
                 String clienteStr = "Cliente: "+cliente;
-                respuesta.setCodigo(0);
-                respuesta.setMensaje("OK");
-                respuesta.setResultado(infoBBVAService.getClienteByClave(respuesta, cliente));
-                
-		return respuesta;
-	}
+        respuesta.setCodigo(0);
+        respuesta.setMensaje("OK");
+        respuesta.setResultado(infoBBVAService.getClienteByClave(respuesta, cliente));
+
+        return respuesta;
+    }
 }
